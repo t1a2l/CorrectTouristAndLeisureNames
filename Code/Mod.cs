@@ -11,6 +11,7 @@ namespace CorrectTouristAndLeisureNames
 
         public void OnEnabled()
         {
+            Settings.Init();
             HarmonyHelper.DoOnHarmonyReady(() => Patcher.PatchAll());
         }
 
