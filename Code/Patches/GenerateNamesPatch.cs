@@ -23,8 +23,12 @@ namespace CorrectTouristAndLeisureNames
                     Random random = new();
 					Randomizer randomizer = new Randomizer(buildingID);
 					string key = PrefabCollection<BuildingInfo>.PrefabName((uint)__instance.m_info.m_prefabDataIndex);
-					// has a name already in the locale then use it
-					uint num = ColossalFramework.Globalization.Locale.CountUnchecked("BUILDING_NAME", key);
+                    // has a name already in the locale then use it
+                    if (key == "3x4_winter_nightclub_02")
+                    {
+                        key = "3x4_winter_nightclub_01";
+                    }
+                    uint num = ColossalFramework.Globalization.Locale.CountUnchecked("BUILDING_NAME", key);
 					if (num != 0)
 					{
 						__result = ColossalFramework.Globalization.Locale.Get("BUILDING_NAME", key, randomizer.Int32(num));
