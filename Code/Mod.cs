@@ -21,5 +21,16 @@ namespace CorrectTouristAndLeisureNames
                 Patcher.UnpatchAll();
             }
         }
+
+        public void OnSettingsUI(UIHelperBase helper)
+        {
+            UIHelper OriginalDLCHotels = helper.AddGroup("Options") as UIHelper;
+
+            OriginalDLCHotels.AddCheckbox("Use default random hotel names", Settings.UseDefaultRandomHotelNames.value, (b) =>
+            {
+                Settings.UseDefaultRandomHotelNames.value = b;
+            });
+
+        }
     }
 }
