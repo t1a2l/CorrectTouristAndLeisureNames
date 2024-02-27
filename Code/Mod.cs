@@ -1,5 +1,6 @@
 ﻿using ICities;
 using CitiesHarmony.API;
+using CorrectTouristAndLeisureNames.Managers;
 
 namespace CorrectTouristAndLeisureNames
 {
@@ -12,6 +13,7 @@ namespace CorrectTouristAndLeisureNames
         public void OnEnabled()
         {
             Settings.Init();
+            HotelNamesManager.Init();
             HarmonyHelper.DoOnHarmonyReady(() => Patcher.PatchAll());
         }
 

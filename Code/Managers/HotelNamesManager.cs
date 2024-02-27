@@ -7,11 +7,8 @@ namespace CorrectTouristAndLeisureNames.Managers
     {
         public static Dictionary<ushort, string> HotelNames;
 
-        public static string[] hotel_names = [
-            "Hotel Hiya", "Grand Hotel", "Night Inn", "Fiesta Hotel", "Your Choice Hotel",
-            "Hotel Intercontinental", "Crest Resorts", "Best Eastern", "Stratus Hotel",
-            "Almost Five Star Hotel", "Octahotel", "Hotel Beacon",
-        ];
+        public static string[] hotel_names = ["Hotel Hiya", "Grand Hotel", "Night Inn", "Fiesta Hotel", "Your Choice Hotel", 
+            "Hotel Intercontinental", "Crest Resorts", "Best Eastern", "Stratus Hotel", "Almost Five Star Hotel", "Octahotel", "Hotel Beacon"];
 
         public static void Init()
         {
@@ -32,8 +29,8 @@ namespace CorrectTouristAndLeisureNames.Managers
             {
                 Random random = new();
                 int index = random.Next(hotel_names.Length);
-                string new_name = hotel_names[index];
-                HotelNames.Add(buildingId, new_name);
+                name = hotel_names[index];
+                HotelNames.Add(buildingId, name);
             }
             return name;
         }
