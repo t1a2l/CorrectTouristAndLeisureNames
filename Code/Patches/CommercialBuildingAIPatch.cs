@@ -1,27 +1,28 @@
 ﻿using ColossalFramework.Math;
 using HarmonyLib;
-using System;
+using CorrectTouristAndLeisureNames.Managers;
 
-
-namespace CorrectTouristAndLeisureNames
+namespace CorrectTouristAndLeisureNames.Patches
 {
-    [HarmonyPatch(typeof(CommercialBuildingAI), "GenerateName")]
-    public static class GenerateNamesPatch
+    [HarmonyPatch(typeof(CommercialBuildingAI))]
+    public static class CommercialBuildingAIPatch
     {
-        public static string[] hotel_names = [
-            "Hotel Hiya", "Grand Hotel", "Night Inn", "Fiesta Hotel", "Your Choice Hotel", 
-            "Hotel Intercontinental", "Crest Resorts", "Best Eastern", "Stratus Hotel", 
-            "Almost Five Star Hotel", "Octahotel", "Hotel Beacon", 
-        ];
+        [HarmonyPatch(typeof(CommercialBuildingAI), "ReleaseBuilding")]
+        [HarmonyPostfix]
+        public static void ReleaseBuilding(ushort buildingID, ref Building data)
+        {
+            HotelNamesManager.RemoveHotelName(buildingID);
+        }
 
-        public static bool Prefix(CommercialBuildingAI __instance, ushort buildingID, InstanceID caller, ref string __result)
+        [HarmonyPatch(typeof(CommercialBuildingAI), "GenerateName")]
+        [HarmonyPrefix]
+        public static bool GenerateNames(CommercialBuildingAI __instance, ushort buildingID, InstanceID caller, ref string __result)
         {
             if (__instance.m_info.m_prefabDataIndex != -1)
 			{
 				if (__instance.m_info.m_class.m_subService == ItemClass.SubService.CommercialTourist)
                 {
-                    Random random = new();
-					Randomizer randomizer = new Randomizer(buildingID);
+					Randomizer randomizer = new(buildingID);
 					string key = PrefabCollection<BuildingInfo>.PrefabName((uint)__instance.m_info.m_prefabDataIndex);
                     // has a name already in the locale then use it
                     if (key == "3x4_winter_nightclub_02")
@@ -36,9 +37,12 @@ namespace CorrectTouristAndLeisureNames
 					}
                     if(Settings.UseDefaultRandomHotelNames.value == true)
                     {
-                        int index = random.Next(hotel_names.Length);
-                        __result = hotel_names[index];
+                        __result = HotelNamesManager.GetHotelName(buildingID);
                         return false;
+                    }
+                    else
+                    {
+                        HotelNamesManager.RemoveHotelName(buildingID);
                     }
                     int periodPos = __instance.m_info.name.IndexOf('.');
                     if (periodPos >= 0)
