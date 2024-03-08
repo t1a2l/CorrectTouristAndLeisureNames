@@ -8,7 +8,7 @@ namespace CorrectTouristAndLeisureNames
     {
         public string Name => "Correct Tourist And Leisure Names";
 
-        public string Description => "Give correct names to the hotles and clubs in the city";
+        public string Description => "Give correct names to custom hotels in the city";
 
         public void OnEnabled()
         {
@@ -29,9 +29,9 @@ namespace CorrectTouristAndLeisureNames
         {
             UIHelper OriginalDLCHotels = helper.AddGroup("Options") as UIHelper;
 
-            OriginalDLCHotels.AddCheckbox("Use default random hotel names", Settings.UseDefaultRandomHotelNames.value, (b) =>
+            OriginalDLCHotels.AddCheckbox("Use after the dark dlc hotel names", Settings.UseAfterTheDarkDLCHoteNames.value, (b) =>
             {
-                Settings.UseDefaultRandomHotelNames.value = b;
+                Settings.UseAfterTheDarkDLCHoteNames.value = b;
             });
 
         }

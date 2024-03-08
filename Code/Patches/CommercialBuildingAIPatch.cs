@@ -35,7 +35,7 @@ namespace CorrectTouristAndLeisureNames.Patches
 						__result = ColossalFramework.Globalization.Locale.Get("BUILDING_NAME", key, randomizer.Int32(num));
 						return false;
 					}
-                    if(Settings.UseDefaultRandomHotelNames.value == true)
+                    if(Settings.UseAfterTheDarkDLCHoteNames.value == true)
                     {
                         __result = HotelNamesManager.GetHotelName(buildingID);
                         return false;

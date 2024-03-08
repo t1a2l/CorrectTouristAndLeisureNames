@@ -8,7 +8,7 @@ namespace CorrectTouristAndLeisureNames
     {
         public const string settingsFileName = "CorrectTouristAndLeisureNames_Settings";
 
-        public static SavedBool UseDefaultRandomHotelNames = new("UseDefaultRandomHotelNames", settingsFileName, false, true);
+        public static SavedBool UseAfterTheDarkDLCHoteNames = new("UseAfterTheDarkDLCHoteNames", settingsFileName, false, true);
 
         public static void Init()
         {
